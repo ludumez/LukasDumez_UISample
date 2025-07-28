@@ -13,20 +13,47 @@ public class MenuManager : MonoBehaviour
 
     private List<object> _controllerBlockers = new();
     private bool _block;
+    private PlayerStateManager _playerStateManager;
 
     private void OnEnable()
     {
+        ReflectCurrentInput.OnInputTypeChanged += OnInputDeviceChanged;
         PlayerInput.OnOpenMenuActionUI += Toggle;
     }
 
     private void OnDisable()
     {
+        ReflectCurrentInput.OnInputTypeChanged -= OnInputDeviceChanged;
         PlayerInput.OnOpenMenuActionUI -= Toggle;
     }
 
     private void Start()
     {
         _menuController.Initialize();
+        _playerStateManager = PlayerStateManager.Instance;
+    }
+
+    //We listen to see if we change the input type,
+    //if we are using the keyboard or gamepad to navigate we want to hide the mouse cursor
+    private void OnInputDeviceChanged(InputType type)
+    {
+
+        switch (type)
+        {
+            case InputType.Keyboard:
+                _playerStateManager.SelectPlayerState(PlayerState.InUIWithControllerOrKeyboard);
+                break;
+            case InputType.Gamepad:
+                _playerStateManager.SelectPlayerState(PlayerState.InUIWithControllerOrKeyboard);
+                break;
+            case InputType.Mouse:
+                _playerStateManager.SelectPlayerState(PlayerState.InUIWithMouse);
+                break;
+            default:
+                Debug.LogWarning($"Unknown input type: {type}");
+                break;
+        }
+
     }
 
 

@@ -202,7 +202,7 @@ public class KeyboardController : MonoBehaviour
 
         //navigation
         //If using a keyboard only allow typing with the keyboard
-        if (ReflectCurrentInput.CurrentInputType != InputType.MouseAndKeyboard)
+        if (ReflectCurrentInput.CurrentInputType != InputType.Keyboard)
             _eventSystem.SetSelectedGameObject(null); // Clear previous selection  
         //if not using a keyboard select object for navigation
         else

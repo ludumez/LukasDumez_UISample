@@ -1,13 +1,13 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 public class ReflectCurrentInput : MonoBehaviour
 {
-
     [SerializeField] InputActionAsset _actionMap;
 
     public static InputType CurrentInputType;
-
+    public static Action<InputType> OnInputTypeChanged;
 
     private void OnEnable()
     {
@@ -36,28 +36,37 @@ public class ReflectCurrentInput : MonoBehaviour
     private void OnActionPerformed(InputAction.CallbackContext context)
     {
         var device = context.control.device;
+        var lastInputDevice = InputType.Mouse; // Default to Mouse if no device is detected
 
         switch (context.control.device)
         {
             case Keyboard:
-                CurrentInputType = InputType.MouseAndKeyboard;
+                lastInputDevice = InputType.Keyboard;
                 break;
             case Gamepad:
-                CurrentInputType = InputType.Gamepad;
+                lastInputDevice = InputType.Gamepad;
                 break;
             case Mouse:
-                CurrentInputType = InputType.MouseAndKeyboard;
+                lastInputDevice = InputType.Mouse;
                 break;
             default:
                 Debug.LogWarning($"Unknown input device: {device.displayName}");
                 break;
         }
+
+        //If we have changed the input type we invoke the event to notify any ui that needs to change its behaviour
+        //(currently for the menu controller to hide the mouse cursor when using a keyboard or gamepad)
+        if (lastInputDevice != CurrentInputType)
+            OnInputTypeChanged?.Invoke(lastInputDevice);
+
+        CurrentInputType = lastInputDevice;
     }
 }
 
 
 public enum InputType
 {
-    MouseAndKeyboard,
+    Mouse,
+    Keyboard,
     Gamepad,
 }

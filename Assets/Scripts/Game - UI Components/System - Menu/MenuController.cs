@@ -144,7 +144,7 @@ public class MenuController : MonoBehaviour
         _mainBodyTween?.Kill();
         _mainBodyTween = _mainBody.DOScale(1, .5f).SetEase(Ease.OutBack);
 
-        _playerStateManager.SelectPlayerState(PlayerState.InUI);
+        _playerStateManager.SelectPlayerState(PlayerState.InUIWithControllerOrKeyboard);
     }
 
     public void CloseMenu()

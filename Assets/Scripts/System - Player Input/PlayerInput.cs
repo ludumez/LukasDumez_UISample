@@ -18,7 +18,7 @@ public class PlayerInput : MonoBehaviour
     private InputAction moveActionMain;
     private InputAction lookActionMain;
     private InputAction interactActionMain;
-    public InputAction jumpActionMain;
+    private InputAction jumpActionMain;
 
     //Static events
     //Make sure to clear them properly when disabling to avoid memory issues

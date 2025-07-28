@@ -86,7 +86,8 @@ public class KeyboardKey : SelectableElement
 
     private void FixedUpdate()
     {
-        if (ReflectCurrentInput.CurrentInputType != InputType.MouseAndKeyboard)
+        //If we arent using a keyboard we do not want the keycap to respond to keyboard input
+        if (ReflectCurrentInput.CurrentInputType != InputType.Keyboard)
             return;
 
 

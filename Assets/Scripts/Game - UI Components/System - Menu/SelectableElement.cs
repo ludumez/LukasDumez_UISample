@@ -40,7 +40,7 @@ public class SelectableElement : Button
     {
         base.OnPointerEnter(eventData);
         BroadcastMessage("OnSelected", SendMessageOptions.DontRequireReceiver);
-        OnSelect(eventData);
+        //OnSelect(eventData);
         Debug.Log("OnPointerEnter: " + name);
     }
 
@@ -48,7 +48,7 @@ public class SelectableElement : Button
     {
         base.OnPointerExit(eventData);
         BroadcastMessage("OnDeselected", SendMessageOptions.DontRequireReceiver);
-        OnDeselect(eventData);
+        //OnDeselect(eventData);
         Debug.Log("OnPointerExit: " + name);
     }
 }
