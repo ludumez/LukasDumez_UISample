@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b28919db077720a499f61e64622f87a8, type: 3}
+  m_Name: Bait - Nematomorfa
+  m_EditorClassIdentifier: 
+  _itemName: Nematomorfa
+  _itemDescription: 
+  _itemSprite: {fileID: 1666405954, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
+  AssetPath: 
