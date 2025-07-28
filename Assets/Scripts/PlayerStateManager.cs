@@ -23,7 +23,6 @@ public class PlayerStateManager : MonoBehaviour
     private PlayerState _currentPlayerState;
 
 
-    [SerializeField] private InteractionManager _interactionManager;
     [SerializeField] private CameraController _cameraController;
     [SerializeField] private MovementController _movementController;
     [SerializeField] private CursorController _cursorController;
@@ -42,28 +41,24 @@ public class PlayerStateManager : MonoBehaviour
                 _cameraController.BlockCamera(this, false);
                 _movementController.BlockMovement(this, false);
                 _cursorController.SetCursorState(CursorStates.Locked);
-                _interactionManager.BlockInteractions(this, false);
                 _menuManager.BlockMenu(this, false);
                 break;
             case PlayerState.InUI:
                 _cameraController.BlockCamera(this, true);
                 _movementController.BlockMovement(this, true);
                 _cursorController.SetCursorState(CursorStates.UI);
-                _interactionManager.BlockInteractions(this, true);
                 _menuManager.BlockMenu(this, true);
                 break;
             case PlayerState.InDialogue:
                 _cameraController.BlockCamera(this, true);
                 _movementController.BlockMovement(this, true);
                 _cursorController.SetCursorState(CursorStates.UI);
-                _interactionManager.BlockInteractions(this, true);
                 _menuManager.BlockMenu(this, true);
                 break;
             case PlayerState.Fishing:
                 _cameraController.BlockCamera(this, true);
                 _movementController.BlockMovement(this, true);
                 _cursorController.SetCursorState(CursorStates.Locked);
-                _interactionManager.BlockInteractions(this, true);
                 _menuManager.BlockMenu(this, true);
                 break;
 
