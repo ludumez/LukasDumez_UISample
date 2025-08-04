@@ -55,14 +55,14 @@ public class PlayerStateManager : MonoBehaviour
                 _cameraController.BlockCamera(this, true);
                 _movementController.BlockMovement(this, true);
                 _cursorController.SetCursorState(CursorStates.Locked);
-                _menuManager.BlockMenu(this, true);
+                _menuManager.BlockMenu(this, false);
                 break;
             //if we are using a mouse we want to show the mouse cursor
             case PlayerState.InUIWithMouse:
                 _cameraController.BlockCamera(this, true);
                 _movementController.BlockMovement(this, true);
                 _cursorController.SetCursorState(CursorStates.UI);
-                _menuManager.BlockMenu(this, true);
+                _menuManager.BlockMenu(this, false);
                 break;
             case PlayerState.InDialogue:
                 _cameraController.BlockCamera(this, true);

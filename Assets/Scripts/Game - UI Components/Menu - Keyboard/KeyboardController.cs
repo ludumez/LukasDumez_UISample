@@ -59,9 +59,8 @@ public class KeyboardController : MonoBehaviour
     private int _currentTextIndex;
 
 
-
-
     //Array of all supported keyboard characters
+    //Has the potential of being a limiting factor for other languages
     private Char[] _keyboardChars = new Char[27] { 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
                                                     'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L',
                                                     'Z', 'X', 'C', 'V', 'B', 'N', 'M', ' ' // ' ' for space . '\b' for backspace
@@ -72,7 +71,9 @@ public class KeyboardController : MonoBehaviour
         PlayerInput.OnBackActionUI += BackAction;
         PlayerInput.OnConfirmActionUI += ConfirmAction;
         Keyboard.current.onTextInput += OnKeyPress;
+        ReflectCurrentInput.OnInputTypeChanged += OnInputTypeChanged;
     }
+
 
     private void OnDisable()
     {
@@ -194,6 +195,7 @@ public class KeyboardController : MonoBehaviour
         _menuController.BlockMenu(this, true);
         SetupKeyboard();
         SetupConfirmation();
+        CalculateNavigation();
 
         //animate
         _moveTween?.Kill();
@@ -258,6 +260,55 @@ public class KeyboardController : MonoBehaviour
             Confirm();
     }
 
+
+
+    private void OnInputTypeChanged(InputType type)
+    {
+        CalculateNavigation();
+        _eventSystem.SetSelectedGameObject(null); // Clear previous selection   
+    }
+
+    //We asume that the player will always use a keyboard and mouse at the same time
+    //If we are using a keyboard or mouse we don't allow navigation between the keys since the key press itself triggers the key press action
+    private void CalculateNavigation()
+    {
+        if (ReflectCurrentInput.CurrentInputType == InputType.Mouse || ReflectCurrentInput.CurrentInputType == InputType.Keyboard)
+        {
+            foreach (var key in _keyboardKeys)
+            {
+                key.navigation = new Navigation
+                {
+                    mode = Navigation.Mode.None,
+                };
+            }
+            _confirmButton.navigation = new Navigation
+            {
+                mode = Navigation.Mode.None,
+            };
+            _cancelButton.navigation = new Navigation
+            {
+                mode = Navigation.Mode.None,
+            };
+        }
+        else
+        {
+            foreach (var key in _keyboardKeys)
+            {
+                key.navigation = new Navigation
+                {
+                    mode = Navigation.Mode.Automatic,
+                };
+            }
+            _confirmButton.navigation = new Navigation
+            {
+                mode = Navigation.Mode.Automatic,
+            };
+            _cancelButton.navigation = new Navigation
+            {
+                mode = Navigation.Mode.Automatic,
+            };
+        }
+    }
 }
 
 [System.Serializable]

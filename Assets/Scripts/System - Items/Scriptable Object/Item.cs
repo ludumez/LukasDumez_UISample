@@ -9,7 +9,7 @@ public class Item : ScriptableObject, iDisplayeableElement
     //Can be saved by saving a value for amount and asset path
 
     [SerializeField] public string _itemName;
-    [SerializeField] public string _itemDescription;
+    [SerializeField, TextArea(1, 10)] public string _itemDescription;
     [SerializeField] public Sprite _itemSprite;
 
 

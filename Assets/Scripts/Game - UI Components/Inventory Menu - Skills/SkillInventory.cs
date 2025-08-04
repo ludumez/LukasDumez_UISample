@@ -1,7 +1,10 @@
 using DG.Tweening;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class SkillInventory : Menu
 {
@@ -17,11 +20,21 @@ public class SkillInventory : Menu
     [SerializeField] private Item _fishResource;
     [SerializeField] private AnimationCurve _resourceTransitionCurve;
 
+    [Header("Exit Indication References")]
+    [SerializeField] private Image _exitImage;
+    [SerializeField] private InventoryExitButton _exitButton;
+
     private SkillSelectableElement[] _selectableSkillElements;
     private InventoryManager _inventoryManager;
     private SkillManager _skillManager;
     private Tween _sideBody1Tween;
     private Tween _sideBody2Tween;
+
+    private Coroutine _fillSequence;
+    private Coroutine _emptySequence;
+    private Coroutine _changeMenuSequence;
+    private bool _stopInteraction;//Disable any animation from input 
+    private Tween _scaleTween;
 
     public override void InitMenu(EventSystem eventSystem, MenuController menuController)
     {
@@ -39,7 +52,24 @@ public class SkillInventory : Menu
         }
 
         _eventSystem.SetSelectedGameObject(_defaultSelectableElement.gameObject);
+        _exitButton.Init(_menuController);
     }
+
+
+    private void OnEnable()
+    {
+        SkillManager.OnSkillUnlocked += OnSKillsUpdates;
+    }
+
+    private void OnDisable()
+    {
+        SkillManager.OnSkillUnlocked -= OnSKillsUpdates;
+
+        _sideBody1Tween?.Kill();
+        _sideBody2Tween?.Kill();
+    }
+
+
 
     public override void ForceSelection()
     {
@@ -67,6 +97,9 @@ public class SkillInventory : Menu
         base.MenuOpen();
         gameObject.SetActive(true);
 
+        _exitImage.fillAmount = 0;
+        _stopInteraction = false;
+
         _sideBody1.gameObject.SetActive(false);
         _sideBody1.anchoredPosition = new Vector2(_sideBody1.sizeDelta.x, _sideBody1.anchoredPosition.y);
 
@@ -87,10 +120,9 @@ public class SkillInventory : Menu
         gameObject.SetActive(false);
     }
 
-    private void OnDisable()
+    private void OnSKillsUpdates(SkillSetup setup)
     {
-        _sideBody1Tween?.Kill();
-        _sideBody2Tween?.Kill();
+        UpdateCurrencyDisplay();
     }
 
     private void UpdateCurrencyDisplay()
@@ -99,7 +131,7 @@ public class SkillInventory : Menu
         _fishResourceText.SetText(_inventoryManager.GetItemAmount(_fishResource).ToString() + " <sprite index=1> ");
     }
 
-    public int GetNeededFishReource(SkillSetup skillSetup)
+    public int GetNeededFishResource(SkillSetup skillSetup)
     {
         foreach (var item in skillSetup.RequiredItems)
         {
@@ -121,12 +153,12 @@ public class SkillInventory : Menu
         return 0;
     }
 
-    public int AvailableExplorationResoruce()
+    public int AvailableExplorationResource()
     {
         return _inventoryManager.GetItemAmount(_explorationResource);
     }
 
-    public int AvaialableFishResource()
+    public int AvailableFishResource()
     {
         return _inventoryManager.GetItemAmount(_fishResource);
     }
@@ -156,5 +188,63 @@ public class SkillInventory : Menu
             _inventoryManager.RemoveItem(requiredItem.Item, requiredItem.Amount);
         }
         _skillManager.UnlockSkill(targetSkill.Skill);
+    }
+
+    public override void LeaveMenu(InputAction.CallbackContext context)
+    {
+        base.LeaveMenu(context);
+        if (_stopInteraction)
+            return;
+
+        if (context.started)
+        {
+            if (_emptySequence != null)
+                StopCoroutine(_emptySequence);
+            if (_fillSequence != null)
+                StopCoroutine(_fillSequence);
+            _fillSequence = StartCoroutine(FillSequence());
+        }
+        else if (context.canceled)
+        {
+            if (_emptySequence != null)
+                StopCoroutine(_emptySequence);
+            if (_fillSequence != null)
+                StopCoroutine(_fillSequence);
+            _emptySequence = StartCoroutine(EmptySequence());
+        }
+
+        IEnumerator FillSequence()
+        {
+            while (_exitImage.fillAmount < 1)
+            {
+                yield return new WaitForFixedUpdate();
+                _exitImage.fillAmount += _menuController.ExitInputDuration * Time.fixedDeltaTime;
+            }
+
+            if (_changeMenuSequence != null)
+                StopCoroutine(_changeMenuSequence);
+            _changeMenuSequence = StartCoroutine(ChangeMenuSequence());
+            _fillSequence = null;
+        }
+
+        IEnumerator EmptySequence()
+        {
+            while (_exitImage.fillAmount > 0)
+            {
+                yield return new WaitForFixedUpdate();
+                _exitImage.fillAmount -= _menuController.ExitInputDuration * Time.fixedDeltaTime;
+            }
+            _emptySequence = null;
+        }
+
+        IEnumerator ChangeMenuSequence()
+        {
+            _stopInteraction = true;
+
+            _scaleTween?.Kill();
+            _scaleTween = _exitImage.transform.DOPunchScale(Vector3.one * .2f, .2f);
+            yield return new WaitForSeconds(.3f);
+            _menuController.OnMenuLeft();
+        }
     }
 }

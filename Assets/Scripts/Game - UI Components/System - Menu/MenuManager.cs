@@ -31,12 +31,15 @@ public class MenuManager : MonoBehaviour
     {
         _menuController.Initialize();
         _playerStateManager = PlayerStateManager.Instance;
+        _menuController.CloseMenu();
     }
 
     //We listen to see if we change the input type,
     //if we are using the keyboard or gamepad to navigate we want to hide the mouse cursor
     private void OnInputDeviceChanged(InputType type)
     {
+        if (!_menuController.IsOpen)
+            return;
 
         switch (type)
         {

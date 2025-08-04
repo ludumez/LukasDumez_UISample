@@ -57,9 +57,11 @@ public class ReflectCurrentInput : MonoBehaviour
         //If we have changed the input type we invoke the event to notify any ui that needs to change its behaviour
         //(currently for the menu controller to hide the mouse cursor when using a keyboard or gamepad)
         if (lastInputDevice != CurrentInputType)
+        {
+            CurrentInputType = lastInputDevice;
             OnInputTypeChanged?.Invoke(lastInputDevice);
+        }
 
-        CurrentInputType = lastInputDevice;
     }
 }
 

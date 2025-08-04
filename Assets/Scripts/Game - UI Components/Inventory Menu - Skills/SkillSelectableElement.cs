@@ -160,11 +160,11 @@ public class SkillSelectableElement : SelectableElement
 
     private void ConstructText()
     {
-        int fishRequiredAmount = _skillInventory.GetNeededFishReource(_targetSkillSetup);
+        int fishRequiredAmount = _skillInventory.GetNeededFishResource(_targetSkillSetup);
         int exploreRequiredAmount = _skillInventory.GetNeededExplorationResource(_targetSkillSetup);
 
-        int fishAvailableAmount = _skillInventory.AvaialableFishResource();
-        int exploreAvailableAmount = _skillInventory.AvailableExplorationResoruce();
+        int fishAvailableAmount = _skillInventory.AvailableFishResource();
+        int exploreAvailableAmount = _skillInventory.AvailableExplorationResource();
 
         string text = string.Empty;
 

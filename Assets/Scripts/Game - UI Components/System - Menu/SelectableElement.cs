@@ -41,7 +41,7 @@ public class SelectableElement : Button
         base.OnPointerEnter(eventData);
         BroadcastMessage("OnSelected", SendMessageOptions.DontRequireReceiver);
         //OnSelect(eventData);
-        Debug.Log("OnPointerEnter: " + name);
+        //Debug.Log("OnPointerEnter: " + name);
     }
 
     public override void OnPointerExit(PointerEventData eventData)
@@ -49,6 +49,6 @@ public class SelectableElement : Button
         base.OnPointerExit(eventData);
         BroadcastMessage("OnDeselected", SendMessageOptions.DontRequireReceiver);
         //OnDeselect(eventData);
-        Debug.Log("OnPointerExit: " + name);
+        //Debug.Log("OnPointerExit: " + name);
     }
 }

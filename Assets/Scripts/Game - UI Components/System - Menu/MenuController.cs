@@ -77,6 +77,7 @@ public class MenuController : MonoBehaviour
 
     private PlayerStateManager _playerStateManager;
     public float ExitInputDuration => _exitInputDuration;
+    public bool IsOpen => _isMenuOpen;
 
     private void OnEnable()
     {
@@ -149,6 +150,7 @@ public class MenuController : MonoBehaviour
 
     public void CloseMenu()
     {
+
         _currentMenu?.MenuClose();
 
         _isMenuOpen = false;
