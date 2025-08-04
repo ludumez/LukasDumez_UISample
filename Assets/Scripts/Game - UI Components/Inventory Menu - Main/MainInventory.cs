@@ -24,6 +24,21 @@ public class MainInventory : Menu
     private BaitSelectionManager _baitSelectionManager;
     private HookSelectionManager _hookSelectionManager;
 
+    private void OnEnable()
+    {
+        ReflectCurrentInput.OnInputTypeChanged += OnInputDeviceChanged;
+    }
+    private void OnDisable()
+    {
+        ReflectCurrentInput.OnInputTypeChanged -= OnInputDeviceChanged;
+    }
+
+    private void OnInputDeviceChanged(InputType type)
+    {
+        //if we a using a mouse we want deselect the current selected object
+        if (type == InputType.Mouse)
+            _eventSystem.SetSelectedGameObject(null);
+    }
 
     public override void InitMenu(EventSystem eventSystem, MenuController menuController)
     {
@@ -50,7 +65,6 @@ public class MainInventory : Menu
 
         _selectableElementInspector.DisplayElement(null, false);
     }
-
 
     public override void MenuClose()
     {
