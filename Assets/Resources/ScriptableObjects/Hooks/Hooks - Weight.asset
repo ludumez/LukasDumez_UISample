@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hooks - Weight
   m_EditorClassIdentifier: 
   _itemName: Weight
-  _itemDescription: 
+  _itemDescription: Sinks to the lake bed. Liked by those who stay close to the bottom.
   _itemSprite: {fileID: 1264580546, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Priapulida
   m_EditorClassIdentifier: 
   _itemName: Priapulida
-  _itemDescription: 
+  _itemDescription: They live buried on the sea floor only showing their mouth to
+    hunt.
   _itemSprite: {fileID: 1636094993, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

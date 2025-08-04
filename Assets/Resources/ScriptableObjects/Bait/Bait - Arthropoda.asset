@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Arthropoda
   m_EditorClassIdentifier: 
   _itemName: Arthropoda
-  _itemDescription: 
+  _itemDescription: Bellongs to the most numerous animal filia! They represent over
+    80% of all known animal species.
   _itemSprite: {fileID: -1306679773, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

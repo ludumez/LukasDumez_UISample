@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Gastrotricha
   m_EditorClassIdentifier: 
   _itemName: Gastrotricha
-  _itemDescription: 
+  _itemDescription: Incredibly small creatures. They like to float around in the
+    midle of the ocean, not too deep not too close to the surface.
   _itemSprite: {fileID: 1723011592, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hooks - Siwash
   m_EditorClassIdentifier: 
   _itemName: Siwash
-  _itemDescription: 
+  _itemDescription: I like the name of this one.
   _itemSprite: {fileID: 740416041, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Nermertea
   m_EditorClassIdentifier: 
   _itemName: Nermertea
-  _itemDescription: 
+  _itemDescription: Big worms that live in the sea. They are capable of digging into
+    the ground.
   _itemSprite: {fileID: -2120278215, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

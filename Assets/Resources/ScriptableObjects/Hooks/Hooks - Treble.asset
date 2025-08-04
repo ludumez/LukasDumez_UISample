@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hooks - Treble
   m_EditorClassIdentifier: 
   _itemName: Treble
-  _itemDescription: 
+  _itemDescription: Bigger fish are more likelly to enjoy this octopuss shaped hook.
   _itemSprite: {fileID: 323497921, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

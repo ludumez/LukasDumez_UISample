@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Nematomorfa
   m_EditorClassIdentifier: 
   _itemName: Nematomorfa
-  _itemDescription: 
+  _itemDescription: They start as parasites and live the lest of their lives as worms
+    freely. They are long and very thin.
   _itemSprite: {fileID: 1666405954, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

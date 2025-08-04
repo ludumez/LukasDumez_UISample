@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Hooks - Worm hook
   m_EditorClassIdentifier: 
   _itemName: Wrom hook
-  _itemDescription: 
+  _itemDescription: Its shape makes it easy to attach bait. Bait is less likelly
+    to be consumed after its use.
   _itemSprite: {fileID: -633588218, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

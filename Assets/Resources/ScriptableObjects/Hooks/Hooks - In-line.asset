@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hooks - In-line
   m_EditorClassIdentifier: 
   _itemName: In-Line
-  _itemDescription: 
+  _itemDescription: Just a good old hook. Nothing good, nothing bad.
   _itemSprite: {fileID: 341005226, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

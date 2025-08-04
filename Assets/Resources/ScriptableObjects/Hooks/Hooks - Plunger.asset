@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Hooks - Plunger
   m_EditorClassIdentifier: 
   _itemName: Plunger
-  _itemDescription: 
+  _itemDescription: Can force fish out from their burrows.
   _itemSprite: {fileID: 1170774832, guid: 6f75004fcbd227e4da479083077190e3, type: 3}
   AssetPath: 

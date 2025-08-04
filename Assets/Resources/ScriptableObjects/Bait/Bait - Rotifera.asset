@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: Bait - Rotifera
   m_EditorClassIdentifier: 
   _itemName: Rotifera
-  _itemDescription: 
+  _itemDescription: Small worm that has very strong teeth.
   _itemSprite: {fileID: -1039078665, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 

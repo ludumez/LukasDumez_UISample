@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Bait - Nematoda
   m_EditorClassIdentifier: 
   _itemName: Nematoda
-  _itemDescription: 
+  _itemDescription: They parasite most of the worlds animals by living inside animal
+    blood veins.
   _itemSprite: {fileID: 1672021167, guid: 4715b3a9ae816784c96411a5a1d96df0, type: 3}
   AssetPath: 
